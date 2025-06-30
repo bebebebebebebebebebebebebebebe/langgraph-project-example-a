@@ -1,0 +1,37 @@
+name: 📚 ドキュメント改善
+description: ドキュメントやガイドの追加・改善提案
+title: "[ドキュメント] "
+labels: ["documentation", "triage"]
+body:
+  - type: dropdown
+    id: doc_type
+    attributes:
+      label: 📋 ドキュメントの種類
+      description: どのような文書に関する提案ですか？
+      options:
+        - README.md
+        - API文書
+        - ユーザーガイド
+        - 開発者向けガイド
+        - 設定・環境構築
+        - トラブルシューティング
+        - 用語集
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: missing_content
+    attributes:
+      label: 📝 不足している内容
+      description: どのような情報が不足していますか？
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_improvement
+    attributes:
+      label: ✨ 改善提案
+      description: どのような改善を提案しますか？
+    validations:
+      required: true

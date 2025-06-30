@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-config.json
+
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 質問・議論
+    url: https://github.com/[REPO]/discussions
+    about: 使用方法や技術的な質問はDiscussionsをご利用ください
+  - name: 📖 ドキュメント
+    url: https://github.com/[REPO]/wiki
+    about: プロジェクトの詳細な説明やガイドはWikiをご確認ください

@@ -1,0 +1,25 @@
+name: ⚡ パフォーマンス問題
+description: 処理速度やリソース使用量に関する問題
+title: "[パフォーマンス] "
+labels: ["performance", "triage"]
+body:
+  - type: dropdown
+    id: performance_issue
+    attributes:
+      label: 📊 パフォーマンス問題の種類
+      options:
+        - 応答時間が遅い
+        - メモリ使用量が多い
+        - CPU使用率が高い
+        - LLM API呼び出しが多すぎる
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: performance_details
+    attributes:
+      label: 📈 詳細な症状
+      description: 具体的な数値や現象を教えてください
+    validations:
+      required: true

@@ -1,0 +1,130 @@
+name: 🤖 エージェント改善
+description: AIエージェントの出力品質や対話機能の改善提案
+title: "[エージェント改善] "
+labels: ["agent-improvement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AIエージェントの改善提案をありがとうございます！🤖✨
+
+        エージェントの対話品質やアウトプットの改善に関するご提案をお聞かせください。
+
+  - type: dropdown
+    id: target_agent
+    attributes:
+      label: 🎯 対象エージェント
+      description: 改善対象のエージェントを選択してください
+      options:
+        - biz_requirement (ビジネス要件定義エージェント)
+        - task_management (タスク管理エージェント)
+        - 全エージェント共通
+    validations:
+      required: true
+
+  - type: dropdown
+    id: improvement_category
+    attributes:
+      label: 📊 改善カテゴリ
+      description: どの側面の改善ですか？
+      options:
+        - 対話の自然さ・親しみやすさ
+        - 質問の適切性・網羅性
+        - 生成ドキュメントの品質
+        - エラーハンドリング・回復力
+        - パフォーマンス・応答速度
+        - プロンプトエンジニアリング
+        - ワークフロー・フェーズ制御
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: 📋 現在の動作
+      description: 現在のエージェントの動作を具体的に説明してください
+      placeholder: |
+        例：
+        - 専門用語が多すぎて非技術者には理解が困難
+        - 同じような質問を繰り返す
+        - 生成されるドキュメントの構造が一貫していない
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired_behavior
+    attributes:
+      label: ✨ 望ましい動作
+      description: どのような改善を期待していますか？
+      placeholder: |
+        例：
+        - より親しみやすい言葉遣いで質問する
+        - ユーザーの回答を理解して適応的に対話する
+        - 一貫性のある美しいドキュメントを生成する
+    validations:
+      required: true
+
+  - type: textarea
+    id: specific_examples
+    attributes:
+      label: 📝 具体例
+      description: 問題となる具体的な対話例やアウトプット例があれば教えてください
+      placeholder: |
+        【現在の対話例】
+        エージェント: "非機能要件の詳細な仕様を教えてください"
+        ユーザー: "？？？"
+
+        【改善案】
+        エージェント: "システムの速さやセキュリティで、特に気になる点はありますか？"
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact_assessment
+    attributes:
+      label: 📈 改善による効果
+      description: この改善によってどのような効果が期待されますか？
+      placeholder: |
+        例：
+        - 非技術者の理解度向上
+        - ヒアリング時間の短縮
+        - 生成ドキュメントの満足度向上
+        - エージェントの利用継続率向上
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical_approach
+    attributes:
+      label: ⚙️ 技術的なアプローチ案
+      description: 技術的な実装アイデアがあれば教えてください（技術者向け）
+      placeholder: |
+        例：
+        - システムプロンプトの改善
+        - Few-shot例の追加
+        - 温度パラメータの調整
+        - ワークフローの修正
+        - 新しいValidationロジックの追加
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: improvement_priority
+    attributes:
+      label: 🚀 改善の重要度
+      description: この改善の重要度を選択してください
+      options:
+        - label: 🔴 高（ユーザビリティに大きく影響）
+        - label: 🟡 中（使いやすさの向上）
+        - label: 🟢 低（Nice to have）
+
+  - type: checkboxes
+    id: testing_willingness
+    attributes:
+      label: 🧪 テストへの協力
+      description: 改善後のテストにご協力いただけますか？
+      options:
+        - label: 改善版のテストに協力できる
+        - label: フィードバックを提供できる
+        - label: 具体的なユースケースを提供できる

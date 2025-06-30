@@ -1,0 +1,136 @@
+name: ✨ 機能要求
+description: 新機能やエージェントの改善提案
+title: "[機能要求] "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        機能要求をありがとうございます！🎯
+
+        AIエージェントシステムをより良くするための提案をお聞かせください。
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: 📋 要求の種類
+      description: どのような改善をお求めですか？
+      options:
+        - 新しいエージェントの追加
+        - 既存エージェントの機能拡張
+        - ユーザーインターフェースの改善
+        - パフォーマンスの向上
+        - ドキュメント生成の改善
+        - 新しいLLMプロバイダーの対応
+        - 開発者向けツールの改善
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_agent
+    attributes:
+      label: 🤖 対象エージェント
+      description: 改善対象のエージェントを選択してください
+      options:
+        - biz_requirement (ビジネス要件定義エージェント)
+        - task_management (タスク管理エージェント)
+        - 新しいエージェント
+        - 共通基盤・ワークフロー
+        - 全般
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user_impact
+    attributes:
+      label: 👥 想定ユーザー
+      description: この機能は主にどのユーザーに恩恵がありますか？
+      options:
+        - 非技術者（ビジネス要件定義の利用者）
+        - 開発者（コントリビューター）
+        - プロジェクト管理者
+        - すべてのユーザー
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_description
+    attributes:
+      label: 🎯 解決したい課題
+      description: 現在どのような課題がありますか？
+      placeholder: |
+        例：
+        - 生成されるドキュメントが視覚的に見づらい
+        - 特定業界向けの要件テンプレートが不足している
+        - エージェント間の連携が困難
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: 💡 提案する解決策
+      description: どのような機能・改善を提案しますか？
+      placeholder: |
+        例：
+        - マークダウンフォーマッターの改善
+        - 業界別テンプレートの追加
+        - エージェント間通信機能の実装
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_benefits
+    attributes:
+      label: 📈 期待される効果
+      description: この機能によってどのような改善が期待されますか？
+      placeholder: |
+        例：
+        - ドキュメントの可読性が50%向上
+        - 要件定義の時間が30%短縮
+        - 開発者の作業効率が向上
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternative_solutions
+    attributes:
+      label: 🔄 代替案
+      description: 他に考えられる解決方法があれば教えてください
+    validations:
+      required: false
+
+  - type: textarea
+    id: technical_considerations
+    attributes:
+      label: ⚙️ 技術的考慮事項
+      description: 実装時の技術的な考慮点があれば教えてください（技術者の方向け）
+      placeholder: |
+        例：
+        - LangGraphのワークフロー変更が必要
+        - 新しい依存関係の追加
+        - パフォーマンスへの影響
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: priority_level
+    attributes:
+      label: 🚀 優先度
+      description: この機能の優先度を教えてください
+      options:
+        - label: 🔴 高（緊急性が高い）
+        - label: 🟡 中（重要だが緊急ではない）
+        - label: 🟢 低（あると良い）
+
+  - type: checkboxes
+    id: implementation_willingness
+    attributes:
+      label: 🛠️ 実装への参加
+      description: 実装への参加意欲があるかお聞かせください
+      options:
+        - label: 自分で実装したい（Pull Request提出予定）
+        - label: 技術的なアドバイスを提供できる
+        - label: テストや検証に協力できる
+        - label: 実装はお任せしたい

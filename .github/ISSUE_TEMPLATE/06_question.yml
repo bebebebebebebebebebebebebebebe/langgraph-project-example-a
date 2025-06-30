@@ -1,0 +1,42 @@
+name: ❓ 質問・サポート
+description: 使用方法や技術的な質問
+title: "[質問] "
+labels: ["question", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ご質問をありがとうございます！❓
+
+        まずは[Discussions](https://github.com/[REPO]/discussions)もご確認ください。
+        似たような質問と回答が見つかるかもしれません。
+
+  - type: dropdown
+    id: question_category
+    attributes:
+      label: 📋 質問のカテゴリ
+      options:
+        - 環境構築・セットアップ
+        - エージェントの使用方法
+        - 設定・カスタマイズ
+        - トラブルシューティング
+        - 技術的な実装
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: question_detail
+    attributes:
+      label: ❓ 具体的な質問
+      description: 何について知りたいですか？
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_tried
+    attributes:
+      label: 🔍 試したこと
+      description: すでに試したことがあれば教えてください
+    validations:
+      required: false

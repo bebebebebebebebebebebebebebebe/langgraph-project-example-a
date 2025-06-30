@@ -1,0 +1,121 @@
+name: 🐛 バグ報告
+description: AIエージェントの動作に関する問題を報告
+title: "[バグ] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バグの報告をありがとうございます！🙏
+
+        問題を迅速に解決するため、以下の情報をご提供ください。
+        技術的な詳細がわからない場合は、わかる範囲で結構です。
+
+  - type: dropdown
+    id: agent_type
+    attributes:
+      label: 🤖 対象エージェント
+      description: 問題が発生したエージェントを選択してください
+      options:
+        - biz_requirement (ビジネス要件定義エージェント)
+        - task_management (タスク管理エージェント)
+        - 共通基盤・ワークフロー
+        - その他
+    validations:
+      required: true
+
+  - type: dropdown
+    id: user_type
+    attributes:
+      label: 👤 ユーザータイプ
+      description: あなたの立場を教えてください
+      options:
+        - 非技術者（ビジネス要件定義の利用者）
+        - 開発者（コントリビューター）
+        - プロジェクト管理者
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: 🔍 問題の詳細
+      description: 何が起こったかを具体的に説明してください
+      placeholder: |
+        例：
+        - 要件ヒアリング中にエラーが発生した
+        - 生成されたドキュメントの形式がおかしい
+        - エージェントが応答しなくなった
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: 🔄 再現手順
+      description: 問題を再現するための手順を教えてください
+      placeholder: |
+        1. `biz-requirement-agent` を実行
+        2. 「プロジェクト名は〇〇です」と入力
+        3. 次の質問を待つ
+        4. エラーが発生
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: ✅ 期待していた動作
+      description: 本来どのような動作を期待していましたか？
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_logs
+    attributes:
+      label: 📋 エラーログ・スクリーンショット
+      description: |
+        エラーメッセージやスクリーンショットがあれば貼り付けてください
+        （個人情報は事前に削除してください）
+      placeholder: |
+        エラーログをここに貼り付け...
+
+        または画像をドラッグ&ドロップ
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 💻 実行環境
+      description: 実行環境の情報を教えてください（わかる範囲で）
+      placeholder: |
+        - OS: macOS 14.0 / Windows 11 / Ubuntu 22.04
+        - Python: 3.11.5
+        - uv: 0.1.0
+        - その他関連する情報
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: impact_level
+    attributes:
+      label: 📊 影響レベル
+      description: この問題の影響度を教えてください
+      options:
+        - label: 🔴 致命的（システムが使用不可）
+        - label: 🟡 高（主要機能に支障）
+        - label: 🟢 中（軽微な機能の問題）
+        - label: 🔵 低（表示・UXの問題）
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ 確認事項
+      description: 報告前に以下をご確認ください
+      options:
+        - label: 既存のissueを検索し、重複していないことを確認した
+          required: true
+        - label: 最新のコードで問題が再現することを確認した
+          required: true
+        - label: 個人情報や機密情報を削除した
+          required: true
