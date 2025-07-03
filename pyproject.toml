@@ -10,6 +10,7 @@ requires-python = ">=3.13"
 dependencies = [
     "click>=8.2.1",
     "fastapi>=0.115.14",
+    "fastmcp>=2.10.1",
     "google-cloud-aiplatform[langchain,reasoningengine]>=1.76.0",
     "httpx>=0.27.0",
     "langchain-chroma>=0.2.4",
@@ -29,6 +30,7 @@ dependencies = [
 [project.scripts]
 example-agent = "src.graphs.example_agent:main"
 graph-server = "src.app:main"
+mcp-server-jsonplaceholder = "src.mcp.jsonplaceholder.server:main"
 
 [build-system]
 requires = ["hatchling"]
