@@ -16,6 +16,7 @@ dependencies = [
     "langchain-chroma>=0.2.4",
     "langchain-community>=0.3.26",
     "langchain-core>=0.3.66",
+    "langchain-google-vertexai>=2.0.13",
     "langchain-openai>=0.3.27",
     "langchain-text-splitters>=0.3.8",
     "langgraph>=0.5.0",
@@ -30,6 +31,7 @@ dependencies = [
 
 [project.scripts]
 graph-server = "app:main"
+simple-chatbot = "graphs.simple_chatbot:main"
 mcp-server-jsonplaceholder = "mcp_servers.jsonplaceholder:main"
 
 [build-system]
