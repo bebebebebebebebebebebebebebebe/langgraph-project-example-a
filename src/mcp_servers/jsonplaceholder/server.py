@@ -76,3 +76,33 @@ async def get_all_users(params: Optional[UserParams | None] = None) -> list:
     except Exception as e:
         print(f'An unexpected error occurred: {e}')
         return []
+
+
+@mcp.tool
+async def get_user_by_id(user_id: int) -> dict:
+    """
+    Get a user by ID from the JSONPlaceholder API.
+
+    Args:
+        user_id (int): ID of the user to retrieve.
+
+    Returns:
+        dict: User data.
+    """
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(f'{config.BASE_URL}/users/{user_id}')
+            response.raise_for_status()
+            return response.json()
+
+    except httpx.HTTPStatusError as e:
+        print(f'HTTP error occurred: {e.response.status_code} - {e.response.text}')
+        return {}
+
+    except httpx.RequestError as e:
+        print(f'Request error occurred: {e}')
+        return {}
+
+    except Exception as e:
+        print(f'An unexpected error occurred: {e}')
+        return {}
