@@ -10,7 +10,6 @@ from langgraph.graph.message import add_messages
 # 認証情報を設定
 credentials = service_account.Credentials.from_service_account_file('./gcp_cred.json')
 
-# Vertex AIモデルを初期化
 llm = ChatVertexAI(
     model_name='gemini-2.0-flash',
     credentials=credentials,

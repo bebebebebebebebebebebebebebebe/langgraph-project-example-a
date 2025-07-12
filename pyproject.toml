@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "arxiv>=2.2.0",
     "click>=8.2.1",
     "fastapi>=0.115.14",
     "fastmcp>=2.10.1",
@@ -24,6 +25,7 @@ dependencies = [
     "langgraph-sdk>=0.1.72",
     "mcp[cli]>=1.10.1",
     "pydantic-settings>=2.10.1",
+    "pymupdf>=1.26.3",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
     "python-dotenv>=1.1.1",
