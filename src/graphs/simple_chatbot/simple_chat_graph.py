@@ -2,7 +2,8 @@ from typing import Annotated, TypedDict
 
 from google.oauth2 import service_account
 from langchain_core.messages import AIMessage, BaseMessage
-from langchain_google_vertexai import VertexAI
+from langchain_core.output_parsers import StrOutputParser
+from langchain_google_vertexai import ChatVertexAI
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.graph.message import add_messages
 
@@ -10,15 +11,19 @@ from langgraph.graph.message import add_messages
 credentials = service_account.Credentials.from_service_account_file('./gcp_cred.json')
 
 # Vertex AIモデルを初期化
-model = VertexAI(
-    model_name='gemini-1.5-pro',  # gemini-1.5-flashの代わりにgemini-1.5-proを使用
+llm = ChatVertexAI(
+    model_name='gemini-2.0-flash',
     credentials=credentials,
     project='technical-research-452606',
 )
 
+parser = StrOutputParser()
+
+chain = llm | parser
+
 
 def chatbot(state: MessagesState) -> MessagesState:
-    response = model.invoke(state['messages'])
+    response = chain.invoke(state['messages'])
     return {'messages': [AIMessage(content=response)]}
 
 

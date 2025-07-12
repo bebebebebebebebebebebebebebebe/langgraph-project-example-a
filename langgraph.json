@@ -1,7 +1,7 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "example-agent": "./src/graphs/example_agent/example_graph.py:graph"
+    "example-agent": "./src/graphs/simple_chatbot/simple_chat_graph.py:graph"
   },
   "env": ".env",
   "http": {

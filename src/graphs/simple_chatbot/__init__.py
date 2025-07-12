@@ -3,7 +3,7 @@ from langchain_google_vertexai import ChatVertexAI
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from .example_graph import chatbot
+from .simple_chat_graph import chatbot
 
 
 class GraphConfig(BaseSettings):
