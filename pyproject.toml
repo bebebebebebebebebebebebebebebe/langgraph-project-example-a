@@ -14,6 +14,7 @@ dependencies = [
     "fastmcp>=2.10.1",
     "google-cloud-aiplatform[langchain,reasoningengine]>=1.76.0",
     "httpx>=0.27.0",
+    "ipykernel>=6.29.5",
     "langchain-chroma>=0.2.4",
     "langchain-community>=0.3.26",
     "langchain-core>=0.3.66",
@@ -26,6 +27,7 @@ dependencies = [
     "mcp[cli]>=1.10.1",
     "pydantic-settings>=2.10.1",
     "pymupdf>=1.26.3",
+    "pypdf>=5.8.0",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
     "python-dotenv>=1.1.1",
@@ -33,7 +35,9 @@ dependencies = [
 
 [project.scripts]
 graph-server = "app:main"
+article-search = "graphs.article_search:main"
 simple-chatbot = "graphs.simple_chatbot:main"
+
 mcp-server-jsonplaceholder = "mcp_servers.jsonplaceholder:main"
 
 [build-system]
@@ -56,6 +60,7 @@ pythonpath = "./src"
 line-length = 135
 src = ["src", "tests"]
 exclude = [".venv"]
+extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
 select = [
