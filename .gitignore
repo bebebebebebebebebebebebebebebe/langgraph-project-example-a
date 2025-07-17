@@ -10,3 +10,5 @@ wheels/
 .venv
 .langgraph_api/*
 .env
+gcp_cred.json
+*.ipynb

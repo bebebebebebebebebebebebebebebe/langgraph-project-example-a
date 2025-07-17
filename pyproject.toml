@@ -8,34 +8,48 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
+    "arxiv>=2.2.0",
     "click>=8.2.1",
     "fastapi>=0.115.14",
+    "fastmcp>=2.10.1",
     "google-cloud-aiplatform[langchain,reasoningengine]>=1.76.0",
     "httpx>=0.27.0",
+    "ipykernel>=6.29.5",
     "langchain-chroma>=0.2.4",
     "langchain-community>=0.3.26",
     "langchain-core>=0.3.66",
+    "langchain-google-vertexai>=2.0.13",
     "langchain-openai>=0.3.27",
     "langchain-text-splitters>=0.3.8",
     "langgraph>=0.5.0",
     "langgraph-cli[inmem]>=0.3.3",
     "langgraph-sdk>=0.1.72",
+    "mcp[cli]>=1.10.1",
     "pydantic-settings>=2.10.1",
+    "pymupdf>=1.26.3",
+    "pypdf>=5.8.0",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
     "python-dotenv>=1.1.1",
 ]
 
 [project.scripts]
-example-agent = "src.graphs.example_agent:main"
-graph-server = "src.app:main"
+graph-server = "app:main"
+article-search = "graphs.article_search:main"
+simple-chatbot = "graphs.simple_chatbot:main"
+
+mcp-server-jsonplaceholder = "mcp_servers.jsonplaceholder:main"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = [
+    "src/mcp_servers/jsonplaceholder",
+    "src/graphs",
+    "src/app"
+]
 
 [tool.pytest.ini_options]
 addopts = "-p no:warnings"
@@ -46,6 +60,7 @@ pythonpath = "./src"
 line-length = 135
 src = ["src", "tests"]
 exclude = [".venv"]
+extend-include = ["*.ipynb"]
 
 [tool.ruff.lint]
 select = [
