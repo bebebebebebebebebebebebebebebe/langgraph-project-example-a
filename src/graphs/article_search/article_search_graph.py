@@ -17,6 +17,7 @@ from langgraph.graph.state import CompiledStateGraph
 from pydantic import BaseModel, Field
 
 from config.settings import config
+from tools.search_papers.search_papers_tool import SearchPapersTool, SearchPapersToolInput
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -124,18 +125,15 @@ class ArticleSearchGraph:
         Returns:
             ArticleSearchState: 検索結果を含む状態
         """
-        query_obj = state.search_query
-        search_results = self._search_arxiv_papers(query_obj)
-
-        if not search_results:
-            logger.warning('ArXiv検索結果が見つかりませんでした。')
-            return {'query': query_obj, 'results': []}
-
-        documents = await self._convert_to_documents(search_results)
+        input_query = SearchPapersToolInput(
+            query=state.search_query.keywords,
+            is_latest=state.search_query.latest,
+        )
+        documents = await SearchPapersTool().ainvoke(input=input_query.model_dump())
 
         if not documents:
-            logger.warning('ArXivの検索結果をDocumentに変換できませんでした。')
-            return {'query': query_obj, 'results': []}
+            logger.warning('ArXivでの論文検索結果が見つかりませんでした。')
+            return state
 
         return {
             'papers': documents,
@@ -161,65 +159,3 @@ class ArticleSearchGraph:
         return {
             'search_query': search_query,
         }
-
-    async def _convert_to_documents(self, search_results: list[arxiv.Result]) -> list[Document]:
-        """
-        ArXivの検索結果をDocumentオブジェクトのリストに変換する関数
-
-        Args:
-            search_results (list[arxiv.Result]): ArXivの検索結果
-
-        Returns:
-            list[Document]: Documentオブジェクトのリスト
-        """
-        documents = []
-        try:
-            for result in search_results:
-                pdf_query = result.pdf_url.split('/')[-1]
-                pdf_loader = ArxivLoader(query=pdf_query)
-                pdf_docs = pdf_loader.load()
-                if not pdf_docs:
-                    logger.warning(f'PDFドキュメントが見つかりませんでした: {result.pdf_url}')
-                    continue
-
-                documents.append(pdf_docs[0])
-
-            return documents
-
-        except Exception as e:
-            logger.error(f'ArXivの検索結果をDocumentに変換中にエラーが発生しました: {e}')
-            return []
-
-    def _search_arxiv_papers(self, query_obj: ArxivQuery, max_docs: int = 5):
-        """
-        ArXivで論文を検索する関数（Pydanticオブジェクトを受け取る）
-
-        Args:
-            query_obj (ArxivQuery): 検索クエリを含むPydanticオブジェクト
-            max_docs (int): 取得する最大ドキュメント数
-
-        Returns:
-            list[Result]: ArXivの検索結果のリスト
-        """
-        try:
-            query = query_obj.keywords
-
-            if query_obj.latest:
-                end_date = datetime.now()
-                start_date = end_date - timedelta(days=180)  # 過去180日間の論文を検索
-                start_date_str = start_date.strftime('%Y%m%d')
-                end_date_str = end_date.strftime('%Y%m%d')
-                query += f' AND submittedDate:[{start_date_str} TO {end_date_str}]'
-
-            client = arxiv.Client()
-            search = arxiv.Search(
-                query=query,
-                max_results=max_docs,
-                sort_by=arxiv.SortCriterion.SubmittedDate,
-                sort_order=arxiv.SortOrder.Descending,
-            )
-            results = list(client.results(search))
-            return results
-        except Exception as e:
-            print(f'ArXiv検索エラー: {e}')
-            return []
