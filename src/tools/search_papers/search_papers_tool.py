@@ -78,22 +78,25 @@ class SearchPapersTool(BaseTool):
         Raises:
             Exception: If an error occurs during the conversion process.
         """
+        future_tasks = []
         load_tasks = []
 
         try:
             for result in search_results:
                 loader_query = result.pdf_url.split('/')[-1]
                 pdf_loader = ArxivLoader(query=loader_query)
-                load_tasks.append(pdf_loader.aload())
+                future_tasks.append(pdf_loader.aload())
 
-            loaded_docs = await asyncio.gather(*load_tasks)
+            load_docs = await asyncio.gather(*future_tasks)
 
-            for docs in loaded_docs:
+            for docs in load_docs:
                 if not docs:
                     logger.warning(f'No documents found for query: {loader_query}')
                     continue
 
-            return loaded_docs
+                load_tasks.append(docs[0])
+
+            return load_tasks
 
         except Exception as e:
             logger.error(f'Error converting ArXiv results to documents: {e}')

@@ -1,3 +1,4 @@
+from google.oauth2 import service_account
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -46,3 +47,9 @@ class Settings(BaseSettings):
 
 
 config = Settings()
+
+google_credentials = (
+    service_account.Credentials.from_service_account_file(config.GOOGLE_APPLICATION_CREDENTIALS)
+    if config.GOOGLE_APPLICATION_CREDENTIALS
+    else None
+)

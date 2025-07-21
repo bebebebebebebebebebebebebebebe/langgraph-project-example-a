@@ -12,3 +12,4 @@ wheels/
 .env
 gcp_cred.json
 *.ipynb
+.prompts.*
